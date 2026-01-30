@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Net;
+using System.Net.Http;
 using System.Net.Http.Json;
 using JsonBackend.Model;
 
@@ -27,4 +28,7 @@ public class ApiUtil {
         return await response.Content.ReadFromJsonAsync<Person>();
     }
 
+    public static async Task<List<Person>> SearchPersons(string col, string query) {
+        return await _client.GetFromJsonAsync<List<Person>>($"https://retoolapi.dev/prTuO5/ccp?{col}={WebUtility.UrlEncode(query)}") ?? throw new Exception("Failed to fetch persons!");
+    }
 }

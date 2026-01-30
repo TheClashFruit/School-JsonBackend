@@ -81,5 +81,14 @@ public partial class MainWindow : System.Windows.Window {
                   ApiUtil.UpdatePerson(person);
               }
         };
+
+        FilterButton.Click += async (s, a) => {
+            var field = FilterComboBox.SelectedIndex == 0 ? "Name" : "LastSeen";
+            var query = FilterTextBox.Text;
+            
+            _persons.Clear();
+            var persons = await ApiUtil.SearchPersons(field, query);
+            foreach (var person in persons) _persons.Add(person);
+        };
     }
 }

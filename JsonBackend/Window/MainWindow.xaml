@@ -49,13 +49,21 @@
                 <ComboBox Grid.Column="0"
                           Width="100"
                           Margin="0 0 8 0"
-                          SelectedIndex="0">
+                          SelectedIndex="0"
+                          Name="FilterComboBox">
                     <ComboBoxItem Content="Name"/>
                     <ComboBoxItem Content="Last Seen"/>
                 </ComboBox>
                 
-                <TextBox Grid.Column="1" Margin="0 0 8 0" />
-                <Button Grid.Column="2">Filter</Button>
+                <TextBox 
+                    Grid.Column="1"
+                    Margin="0 0 8 0"
+                    Name="FilterTextBox" />
+                <Button
+                    Grid.Column="2"
+                    Name="FilterButton">
+                    Filter
+                </Button>
             </Grid>
         </Grid>
         
