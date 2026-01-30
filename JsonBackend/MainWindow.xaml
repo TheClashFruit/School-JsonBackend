@@ -5,8 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JsonBackend"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Social Credit Database" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="350"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" Margin="0 0 8 0">Refresh</Button>
+            <Button Grid.Column="1" Margin="0 0 8 0">Add</Button>
+            <Button Grid.Column="2" Margin="0 0 8 0">Delete</Button>
+            
+            <Grid Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <ComboBox Grid.Column="0"
+                          Width="100"
+                          Margin="0 0 8 0"
+                          SelectedIndex="0">
+                    <ComboBoxItem Content="Name"/>
+                    <ComboBoxItem Content="Last Seen"/>
+                    <ComboBoxItem Content="Social Credit"/>
+                </ComboBox>
+                
+                <TextBox Grid.Column="1" Margin="0 0 8 0" />
+                <Button Grid.Column="2">Filter</Button>
+            </Grid>
+        </Grid>
+        
+        <DataGrid
+            Grid.Row="1"
+            Name="PersonsDataGrid"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Header="Id"
+                    IsReadOnly="True"
+                    Binding="{Binding Id}"/>
+                <DataGridTextColumn
+                    Header="Name"
+                    Binding="{Binding Name}" />
+                <DataGridTextColumn
+                    Header="Last Seen" 
+                    Binding="{Binding LastSeen}" />
+                <DataGridTextColumn
+                    Header="Social Credit"
+                    Binding="{Binding SocialCredit}" />
+            </DataGrid.Columns>   
+        </DataGrid>
     </Grid>
 </Window>
