@@ -23,7 +23,7 @@ namespace JsonBackend.Model;
 public partial class Person
 {
     [JsonPropertyName("id")]
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     [JsonPropertyName("Name")]
     public string Name { get; set; }
