@@ -52,19 +52,34 @@ public partial class MainWindow : System.Windows.Window {
             var window = new CreatePersonWindow {
                 Owner = this
             };
+
+            var success = window.ShowDialog();
             
-            window.ShowDialog();
+            if(success != null)
+                if ((bool) success) {
+                    _persons.Clear();
+                    var persons = await ApiUtil.GetPersons();
+                    foreach (var person in persons) _persons.Add(person);
+                }
         };
         
         DeleteButton.Click += (s, e) => {
             try {
-                if (PersonsDataGrid.SelectedItem != null)
-                    ApiUtil.DeletePerson(((Person)PersonsDataGrid.CurrentItem).Id);
+                if (PersonsDataGrid.SelectedItem != null) {
+                    ApiUtil.DeletePerson(((Person)PersonsDataGrid.SelectedItem).Id);
+                    _persons.Remove((Person)PersonsDataGrid.SelectedItem);
+                }
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
         };
-        
-        
+
+        PersonsDataGrid.CellEditEnding += (s, e) => {
+              if (e.EditAction == DataGridEditAction.Commit) {
+                  var person = (Person)e.Row.DataContext;
+                  
+                  ApiUtil.UpdatePerson(person);
+              }
+        };
     }
 }
